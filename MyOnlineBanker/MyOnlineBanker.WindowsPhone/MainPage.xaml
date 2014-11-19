@@ -9,6 +9,18 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <ListView ItemsSource="{Binding Customers}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding FirstName}" />
+                        <TextBlock Text="{Binding LastName}" />
+                        <TextBlock Text="{Binding Account}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
 
     </Grid>
 </Page>

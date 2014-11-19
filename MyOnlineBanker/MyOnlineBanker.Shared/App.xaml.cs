@@ -17,6 +17,8 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
+using MyOnlineBanker.Models;
+using Parse;
 
 namespace MyOnlineBanker
 {
@@ -37,6 +39,10 @@ namespace MyOnlineBanker
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+
+            ParseObject.RegisterSubclass<Customer>();
+
+            ParseClient.Initialize("jDTlVAnswiAiCF9G8oJnSgfmXAAPXGfEjQruPIf1", "RiDdaRwbmfrYVo7RQ7TdeKSILzTgBLcrakxtSUrC");
         }
 
         /// <summary>
