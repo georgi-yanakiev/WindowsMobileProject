@@ -1,0 +1,80 @@
+﻿<Page
+    x:Class="MyOnlineBanker.ContactsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyOnlineBanker"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interop="using:Windows.UI.Xaml.Interop"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style x:Key="TbStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </Page.Resources>
+
+
+    <StackPanel>
+        <Border BorderThickness="3" BorderBrush="Purple" Margin="0 50 0 0">
+            <TextBlock
+            Text="Contact Information"
+            FontSize="40"
+            HorizontalAlignment="Center" Margin="0 15 0 10"/>
+        </Border>
+        <Grid Margin="10 50 10 0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Address" 
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}"/>
+            <TextBlock Text="Sofia 1000"
+                       Style="{StaticResource TbStyle}"
+                Grid.Row="0"
+                Grid.Column="1"/>
+            <TextBlock Text="Phone Number" 
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}"/>
+            <Button Name="PhoneBlock"
+                Content="+359897235648"
+                Grid.Row="1"
+                Grid.Column="1" Click="CallButton_Click"
+                    BorderThickness="0"
+                    BorderBrush="Transparent"/>
+            <TextBlock Text="Fax" 
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}"/>
+            <TextBlock Text="+3598973224"
+                       Style="{StaticResource TbStyle}"
+                Grid.Row="2"
+                Grid.Column="1"/>
+            <TextBlock Text="Email" 
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}"/>
+            <TextBlock Text="mybank@mybank.com"
+                       Style="{StaticResource TbStyle}"
+                Grid.Row="3"
+                Grid.Column="1"/>
+
+            </Grid>
+    </StackPanel>
+</Page>

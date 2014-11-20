@@ -8,19 +8,41 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <ListView ItemsSource="{Binding Customers}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding FirstName}" />
-                        <TextBlock Text="{Binding LastName}" />
-                        <TextBlock Text="{Binding Account}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+    <StackPanel>
 
+        <Border BorderThickness="3" BorderBrush="Purple" Margin="0 50 0 0">
+            <TextBlock
+            Text="Login"
+            FontSize="40"
+            HorizontalAlignment="Center" Margin="0 15 0 15"/>
+        </Border>
+        <Grid>
 
-    </Grid>
+            <TextBox
+        		x:Name="UsernameTextBox"
+        		Margin="138,113,47,0"/>
+            <TextBox
+        		x:Name="PasswordTextBox"
+        		Margin="138,171,47,0"/>
+            <TextBlock 
+        		HorizontalAlignment="Left" 
+        		Margin="34,128,0,0" 
+        		TextWrapping="Wrap" 
+        		Text="Username" 
+        		VerticalAlignment="Top" 
+        		FontSize="20" RenderTransformOrigin="0.749,1.604"/>
+            <TextBlock 
+        		HorizontalAlignment="Left" 
+        		Margin="34,171,0,0" 
+        		TextWrapping="Wrap" 
+        		Text="Password" 
+        		VerticalAlignment="Top" 
+        		Height="20" 
+        		FontSize="20"/>
+            <Button Content="Login" HorizontalAlignment="Left" Margin="27,229,0,0" VerticalAlignment="Top" Width="156" Click="Login_Click"/>
+            <Button Content="Logout" HorizontalAlignment="Left" Margin="211,229,0,0" VerticalAlignment="Top" Width="156" Click="Logout_Click"/>
+            <Button Content="Contacts" HorizontalAlignment="Left" Margin="27,431,0,0" VerticalAlignment="Top" Width="156" Click="Contacts_Click"/>
+            <Button Content="Map" HorizontalAlignment="Left" Margin="211,431,0,0" VerticalAlignment="Top" Width="156" Click="Maps_Click"/>
+        </Grid>
+    </StackPanel>
 </Page>

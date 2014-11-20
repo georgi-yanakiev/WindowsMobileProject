@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 using MyOnlineBanker.ViewModels;
+using Parse;
 
 namespace MyOnlineBanker
 {
@@ -28,7 +29,7 @@ namespace MyOnlineBanker
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
-            this.DataContext = new AppViewModel();
+//            this.DataContext = new LoginViewModel();
         }
 
         /// <summary>
@@ -45,6 +46,41 @@ namespace MyOnlineBanker
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+
+        }
+
+        public async void LoginUser()
+        {
+            try
+            {
+                await ParseUser.LogInAsync(this.UsernameTextBox.Text, this.PasswordTextBox.Text);
+                // Login was successful.
+                Frame.Navigate(typeof (CustomerDetailsPage));
+            }
+            catch (Exception e)
+            {
+                // The login failed. Check the error to see why.
+            }
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            this.LoginUser();
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            ParseUser.LogOut();
+        }
+
+        private void Maps_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MapPage));
+        }
+
+        private void Contacts_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (ContactsPage));
         }
     }
 }
