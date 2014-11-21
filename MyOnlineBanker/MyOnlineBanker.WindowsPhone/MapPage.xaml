@@ -19,5 +19,11 @@
         <maps:MapControl Name="Map"
                          PedestrianFeaturesVisible="True"
                          />
+        <Button Content="Go Back" 
+                HorizontalAlignment="Stretch" 
+                Margin="0,0,0,-9" 
+                Grid.Row="1" 
+                VerticalAlignment="Bottom"
+                Click="MapBack_OnClick"/>
     </Grid>
 </Page>

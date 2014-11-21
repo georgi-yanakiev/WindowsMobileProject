@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+using Parse;
 
 namespace MyOnlineBanker
 {
@@ -26,5 +27,47 @@ namespace MyOnlineBanker
         {
             this.InitializeComponent();
         }
+
+        public async void LoginUser()
+        {
+            try
+            {
+                await ParseUser.LogInAsync(this.UsernameTextBox.Text, this.PasswordTextBox.Password);
+                // Login was successful.
+                LoginButton.IsEnabled = false;
+                LogoutButton.IsEnabled = true;
+//                Frame.Navigate(typeof(CustomerDetailsPage));
+                this.UsernameTextBox.Text = string.Empty;
+                this.PasswordTextBox.Password = string.Empty;
+            }
+            catch (Exception e)
+            {
+                // The login failed. Check the error to see why.
+            }
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            this.LoginUser();
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            ParseUser.LogOut();
+            LogoutButton.IsEnabled = false;
+            LoginButton.IsEnabled = true;
+        }
+
+        private void Contacts_Click(object sender, RoutedEventArgs e)
+        {
+//            Frame.Navigate(typeof(ContactsPage));
+        }
+
+        private void Maps_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MapPage));
+        }
     }
+
+
 }

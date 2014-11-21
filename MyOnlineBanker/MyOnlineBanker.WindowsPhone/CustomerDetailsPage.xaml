@@ -9,8 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="LayoutRoot">
-        <ListView ItemsSource="{Binding Customers}">
-            <ListView.ItemTemplate>
+        <ComboBox ItemsSource="{Binding Customers}">
+            <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding FirstName}" />
@@ -18,7 +18,7 @@
                         <TextBlock Text="{Binding Account}" />
                     </StackPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
     </Grid>
 </Page>

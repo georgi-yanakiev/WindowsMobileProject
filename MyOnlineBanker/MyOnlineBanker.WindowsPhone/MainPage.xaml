@@ -21,7 +21,7 @@
             <TextBox
         		x:Name="UsernameTextBox"
         		Margin="138,113,47,0"/>
-            <TextBox
+            <PasswordBox
         		x:Name="PasswordTextBox"
         		Margin="138,171,47,0"/>
             <TextBlock 
@@ -39,8 +39,8 @@
         		VerticalAlignment="Top" 
         		Height="20" 
         		FontSize="20"/>
-            <Button Content="Login" HorizontalAlignment="Left" Margin="27,229,0,0" VerticalAlignment="Top" Width="156" Click="Login_Click"/>
-            <Button Content="Logout" HorizontalAlignment="Left" Margin="211,229,0,0" VerticalAlignment="Top" Width="156" Click="Logout_Click"/>
+            <Button Name="LoginButton"  Content="Login" HorizontalAlignment="Left" Margin="27,229,0,0" VerticalAlignment="Top" Width="156" Click="Login_Click"/>
+            <Button Name="LogoutButton" Content="Logout" HorizontalAlignment="Left" Margin="211,229,0,0" VerticalAlignment="Top" Width="156" Click="Logout_Click"/>
             <Button Content="Contacts" HorizontalAlignment="Left" Margin="27,431,0,0" VerticalAlignment="Top" Width="156" Click="Contacts_Click"/>
             <Button Content="Map" HorizontalAlignment="Left" Margin="211,431,0,0" VerticalAlignment="Top" Width="156" Click="Maps_Click"/>
         </Grid>

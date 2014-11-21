@@ -29,6 +29,7 @@ namespace MyOnlineBanker
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+           
 //            this.DataContext = new LoginViewModel();
         }
 
@@ -39,6 +40,8 @@ namespace MyOnlineBanker
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+           
+
             // TODO: Prepare page for display here.
 
             // TODO: If your application contains multiple pages, ensure that you are
@@ -53,9 +56,13 @@ namespace MyOnlineBanker
         {
             try
             {
-                await ParseUser.LogInAsync(this.UsernameTextBox.Text, this.PasswordTextBox.Text);
+                await ParseUser.LogInAsync(this.UsernameTextBox.Text, this.PasswordTextBox.Password);
                 // Login was successful.
+                LoginButton.IsEnabled = false;
+                LogoutButton.IsEnabled = true;
                 Frame.Navigate(typeof (CustomerDetailsPage));
+                this.UsernameTextBox.Text = string.Empty;
+                this.PasswordTextBox.Password = string.Empty;
             }
             catch (Exception e)
             {
@@ -71,6 +78,8 @@ namespace MyOnlineBanker
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             ParseUser.LogOut();
+            LogoutButton.IsEnabled = false;
+            LoginButton.IsEnabled = true;
         }
 
         private void Maps_Click(object sender, RoutedEventArgs e)

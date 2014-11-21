@@ -98,5 +98,10 @@ namespace MyOnlineBanker
             Map.MapElements.Add(mapIcon3);
             Map.MapElements.Add(mapIcon4);
         }
+
+        private void MapBack_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof (MainPage));
+        }
     }
 }

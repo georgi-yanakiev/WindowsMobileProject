@@ -76,5 +76,10 @@
                 Grid.Column="1"/>
 
             </Grid>
+        <Button Content="Go Back"
+                Margin="0 220 0 0"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Bottom"
+                Click="ButtonBase_OnClick"/>
     </StackPanel>
 </Page>

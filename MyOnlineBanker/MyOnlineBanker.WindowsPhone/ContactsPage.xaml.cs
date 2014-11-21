@@ -43,5 +43,9 @@ namespace MyOnlineBanker
             PhoneCallManager.ShowPhoneCallUI(PhoneBlock.Content.ToString(),"My Bank Head Office");
         }
 
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof (MainPage));
+        }
     }
 }

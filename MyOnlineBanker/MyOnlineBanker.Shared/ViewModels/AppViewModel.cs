@@ -86,7 +86,6 @@ namespace MyOnlineBanker.ViewModels
         {
             var customers = await new ParseQuery<Customer>().FindAsync();
             this.Customers = customers.AsQueryable().Select(CustomerViewModel.FromCustomer);
-
         }
     }
 }
