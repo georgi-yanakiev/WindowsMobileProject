@@ -7,18 +7,54 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    
     <Grid x:Name="LayoutRoot">
-        <ComboBox ItemsSource="{Binding Customers}">
-            <ComboBox.ItemTemplate>
+        <StackPanel>
+        <Border BorderThickness="3" BorderBrush="Purple" Margin="0 0 0 0">
+            <TextBlock
+            Text="Account Information"
+            FontSize="40"
+            HorizontalAlignment="Center" Margin="0 15 0 10"/>
+        </Border>
+        </StackPanel>
+        <ListView Name="ListViewX"  SelectionChanged="SelectionChangedEventHandler" ItemsSource="{Binding Customers}" Margin="0 100 0 0" FontSize="30">
+            <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding FirstName}" />
-                        <TextBlock Text="{Binding LastName}" />
-                        <TextBlock Text="{Binding Account}" />
+                        <TextBlock Text="{Binding AccountNumber}" Margin="20 20 100 20" FontSize="25"/>
+                        <TextBlock Text="{Binding Balance}" Margin="0 20 20 20" FontSize="25"/>
+                        <TextBlock Text="{Binding Currency}" Margin="0 20 20 20" FontSize="25"/>
+<!--                        <TextBlock Text="{Binding LastName}" />-->
                     </StackPanel>
                 </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+            </ListView.ItemTemplate>
+        </ListView>
+<!--        <TextBox Name="tbox"></TextBox>-->
+<!--        <Grid Margin="0,169,0,0">-->
+<!--            <Grid.RowDefinitions>-->
+<!--                <RowDefinition/>-->
+<!--                <RowDefinition/>-->
+<!--            </Grid.RowDefinitions>-->
+<!--            <Grid.ColumnDefinitions>-->
+<!--                <ColumnDefinition/>-->
+<!--                <ColumnDefinition/>-->
+<!--            </Grid.ColumnDefinitions>-->
+<!--            <TextBlock Text="Name"-->
+<!--                       Grid.Row="0"-->
+<!--                       Grid.Column="0"/>-->
+<!--            <TextBlock Text="{Binding SelectedAccount.FirstName}"-->
+<!--                       Grid.Row="0"-->
+<!--                       Grid.Column="1"/>-->
+<!--            <TextBlock Text="Account Number"-->
+<!--                       Grid.Row="1"-->
+<!--                       Grid.Column="0"/>-->
+<!--            <TextBlock Text="{Binding SelectedAccount.AccountNumber}"-->
+<!--                       Grid.Row="1"-->
+<!--                       Grid.Column="1"/>-->
+<!--        </Grid>-->
+        <Button Name="LoadFile" Content="Open/Capture" 
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center" Click="LoadFileButtonClick"/>
+        
     </Grid>
 </Page>

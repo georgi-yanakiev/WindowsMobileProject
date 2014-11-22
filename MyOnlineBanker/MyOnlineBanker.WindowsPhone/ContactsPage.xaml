@@ -19,7 +19,7 @@
 
 
     <StackPanel>
-        <Border BorderThickness="3" BorderBrush="Purple" Margin="0 50 0 0">
+        <Border BorderThickness="3" BorderBrush="Purple" Margin="0 0 0 0">
             <TextBlock
             Text="Contact Information"
             FontSize="40"
@@ -76,10 +76,11 @@
                 Grid.Column="1"/>
 
             </Grid>
+
         <Button Content="Go Back"
-                Margin="0 220 0 0"
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Bottom"
-                Click="ButtonBase_OnClick"/>
+        	Margin="0 280 0 0"
+        	HorizontalAlignment="Stretch" 
+        	VerticalAlignment="Bottom"
+        	Click="ButtonBase_OnClick"/>
     </StackPanel>
 </Page>

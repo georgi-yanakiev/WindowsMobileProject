@@ -15,18 +15,18 @@ namespace MyOnlineBanker.Models
             set { SetProperty<string>(value); }
         }
 
-        [ParseFieldName("lastName")]
-        public string LastName
+        [ParseFieldName("middleName")]
+        public string MiddleName
         {
             get { return GetProperty<string>(); }
             set { SetProperty<string>(value); }
         }
 
-        [ParseFieldName("EGN")]
-        public int EGN
+        [ParseFieldName("lastName")]
+        public string LastName
         {
-            get { return GetProperty<int>(); }
-            set { SetProperty<int>(value); }
+            get { return GetProperty<string>(); }
+            set { SetProperty<string>(value); }
         }
 
         [ParseFieldName("address")]
@@ -43,18 +43,46 @@ namespace MyOnlineBanker.Models
             set { SetProperty<int>(value); }
         }
 
-        [ParseFieldName("email")]
-        public string Email
+        [ParseFieldName("IBAN")]
+        public string Iban
         {
             get { return GetProperty<string>(); }
             set { SetProperty<string>(value); }
         }
 
-        [ParseFieldName("account")]
-        public string Account
+        [ParseFieldName("accountNumber")]
+        public string AccountNumber
         {
             get { return GetProperty<string>(); }
             set { SetProperty<string>(value); }
+        }
+
+        [ParseFieldName("accountType")]
+        public string AccountType
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty<string>(value); }
+        }
+
+        [ParseFieldName("currency")]
+        public string Currency
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty<string>(value); }
+        }
+
+        [ParseFieldName("balance")]
+        public decimal Balance
+        {
+            get { return GetProperty<decimal>(); }
+            set { SetProperty<decimal>(value); }
+        }
+
+        [ParseFieldName("blockedAmount")]
+        public decimal BlockedAmount
+        {
+            get { return GetProperty<decimal>(); }
+            set { SetProperty<decimal>(value); }
         }
     }
 }

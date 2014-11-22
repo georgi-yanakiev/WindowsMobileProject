@@ -8,9 +8,10 @@ using GalaSoft.MvvmLight;
 using MyOnlineBanker.Models;
 using Parse;
 
+
 namespace MyOnlineBanker.ViewModels
 {
-    public class AppViewModel : ViewModelBase
+    public class AppViewModel : ViewModelBase, ICustomerViewModel
     {
         private ObservableCollection<CustomerViewModel> customers;
 
@@ -35,36 +36,47 @@ namespace MyOnlineBanker.ViewModels
                 {
                     this.customers.Add(item);
                 }
+//                this.SelectedAccount = this.customers.First();
             }
         }
+
+        public CustomerViewModel SelectedAccount { get; set; }
 
         public AppViewModel()
         {
 //            ParseUser.LogOut();
 //            this.LoginUser();
-            
-//            IList<Account> acc = new List<Account>
-//            {
-//                new Account("EUR21353765",200, "CXV233463476", "EUR", "Debit"),
-//                new Account("USD21353765",100, "DFGKH5346376", "USD", "Deposit"),
-//                new Account("BGN21353765",400, "CTWE3246572", "BGN", "Credit"),
-//                new Account("EUR21353765",7800, "TYU3457548", "EUR", "Debit"),
-//                new Account("JPY21353765", 300, "OPO346346734", "JPY", "Deposit")
-//            };
-//
+
+
+//                        FirstName = model.FirstName,
+//                        MiddleName = model.MiddleName,
+//                        LastName = model.LastName,
+//                        Address = model.Address,
+//                        Phone = model.Phone,
+//                        Iban = model.Iban,
+//                        AccountNumber = model.AccountNumber,
+//                        AccountType = model.AccountType,
+//                        Currency = model.Currency,
+//                        Balance = model.Balance,
+//                        BlockedAmount = model.BlockedAmount
+
 //            ParseObject customer = new Customer();
 //            customer["firstName"] = "Gosho";
+//            customer["middleName"] = "Ivanov";
 //            customer["lastName"] = "Kirov";
-//            customer["EGN"] = 8010182548;
 //            customer["address"] = "Sofia, Lozenec 10";
-//            customer["phone"] = 0897654321;
-//            customer["email"] = "m_kirov@yahoo.com";
-//            customer["account"] = acc;
+//            customer["phone"] = 359897654321;
+//            customer["IBAN"] = "UBBSF57645675432";
+//            customer["accountNumber"] = "EUR7644516841";
+//            customer["accountType"] = "Deposit";
+//            customer["currency"] = "EUR";
+//            customer["balance"] = 300.40;
+//            customer["blockedAmount"] = 5.00;
 //            customer.ACL = new ParseACL(ParseUser.CurrentUser);
 //            customer.SaveAsync();
 
 //            this.CreateUser();
-            
+
             this.LoadCustomers();
         }
 

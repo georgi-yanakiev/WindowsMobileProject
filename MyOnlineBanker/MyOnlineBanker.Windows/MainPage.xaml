@@ -7,7 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.BottomAppBar>
+        <CommandBar Height="71">
+            <AppBarButton Icon="ContactInfo" Label="Contact Info" Click="Contacts_Click"/>
+            <AppBarButton Icon="Map" Label="Our Offices" Click="Maps_Click"/>
+        </CommandBar>
+    </Page.BottomAppBar>
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Border BorderThickness="3" BorderBrush="Purple" Margin="0 50 0 0">
             <TextBlock
@@ -56,22 +61,22 @@
                     Click="Logout_Click" 
                     Height="78"
                     FontSize="30"/>
-            <Button Content="Contacts" 
-                    HorizontalAlignment="Left" 
-                    Margin="25,501,0,0" 
-                    VerticalAlignment="Top" 
-                    Width="204" 
-                    Click="Contacts_Click" 
-                    Height="78"
-                    FontSize="30"/>
-            <Button Content="Map" 
-                    HorizontalAlignment="Left" 
-                    Margin="1131,501,0,0" 
-                    VerticalAlignment="Top" 
-                    Width="204" 
-                    Click="Maps_Click" 
-                    Height="78"
-                    FontSize="30"/>
+<!--            <Button Content="Contacts" -->
+<!--                    HorizontalAlignment="Left" -->
+<!--                    Margin="19,419,0,0" -->
+<!--                    VerticalAlignment="Top" -->
+<!--                    Width="204" -->
+<!--                    Click="Contacts_Click" -->
+<!--                    Height="78"-->
+<!--                    FontSize="30"/>-->
+<!--            <Button Content="Map" -->
+<!--                    HorizontalAlignment="Left" -->
+<!--                    Margin="1125,419,0,0" -->
+<!--                    VerticalAlignment="Top" -->
+<!--                    Width="204" -->
+<!--                    Click="Maps_Click" -->
+<!--                    Height="78"-->
+<!--                    FontSize="30"/>-->
         </Grid>
     </StackPanel>
 </Page>

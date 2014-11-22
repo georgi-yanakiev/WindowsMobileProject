@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -43,6 +45,32 @@ namespace MyOnlineBanker
             ParseObject.RegisterSubclass<Customer>();
 
             ParseClient.Initialize("jDTlVAnswiAiCF9G8oJnSgfmXAAPXGfEjQruPIf1", "RiDdaRwbmfrYVo7RQ7TdeKSILzTgBLcrakxtSUrC");
+
+            bool isNetwork = NetworkInterface.GetIsNetworkAvailable();
+            if (isNetwork == false)
+            {
+
+                ShowNotification("Error", "No Internet Connection");
+            }
+
+        }
+
+        public static void ShowNotification(string title, string message)
+        {
+            const ToastTemplateType template =
+                Windows.UI.Notifications.ToastTemplateType.ToastText02;
+            var toastXml =
+                Windows.UI.Notifications.ToastNotificationManager.GetTemplateContent(template);
+
+            var toastTextElements = toastXml.GetElementsByTagName("text");
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode(title));
+            toastTextElements[1].AppendChild(toastXml.CreateTextNode(message));
+
+            var toast = new Windows.UI.Notifications.ToastNotification(toastXml);
+
+            var toastNotifier =
+                Windows.UI.Notifications.ToastNotificationManager.CreateToastNotifier();
+            toastNotifier.Show(toast);
         }
 
         /// <summary>
@@ -101,6 +129,7 @@ namespace MyOnlineBanker
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
+               
                 if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
@@ -140,4 +169,5 @@ namespace MyOnlineBanker
             deferral.Complete();
         }
     }
+
 }

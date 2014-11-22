@@ -7,10 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.BottomAppBar>
+        <CommandBar Height="71">
+            <AppBarButton Icon="ContactInfo" Label="Contact Info" Click="Contacts_Click"/>
+            <AppBarButton Icon="Map" Label="Our Offices" Click="Maps_Click"/>
+        </CommandBar>
+    </Page.BottomAppBar>
 
     <StackPanel>
 
-        <Border BorderThickness="3" BorderBrush="Purple" Margin="0 50 0 0">
+        <Border BorderThickness="3" BorderBrush="Purple" Margin="0 0 0 0">
             <TextBlock
             Text="Login"
             FontSize="40"
@@ -41,8 +47,6 @@
         		FontSize="20"/>
             <Button Name="LoginButton"  Content="Login" HorizontalAlignment="Left" Margin="27,229,0,0" VerticalAlignment="Top" Width="156" Click="Login_Click"/>
             <Button Name="LogoutButton" Content="Logout" HorizontalAlignment="Left" Margin="211,229,0,0" VerticalAlignment="Top" Width="156" Click="Logout_Click"/>
-            <Button Content="Contacts" HorizontalAlignment="Left" Margin="27,431,0,0" VerticalAlignment="Top" Width="156" Click="Contacts_Click"/>
-            <Button Content="Map" HorizontalAlignment="Left" Margin="211,431,0,0" VerticalAlignment="Top" Width="156" Click="Maps_Click"/>
         </Grid>
     </StackPanel>
 </Page>

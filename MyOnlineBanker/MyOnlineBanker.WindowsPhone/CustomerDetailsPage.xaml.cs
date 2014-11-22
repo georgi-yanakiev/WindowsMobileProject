@@ -1,4 +1,7 @@
-﻿using MyOnlineBanker.Common;
+﻿using Windows.ApplicationModel.Activation;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using MyOnlineBanker.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -109,5 +112,75 @@ namespace MyOnlineBanker
         }
 
         #endregion
+
+        //************************************************************************
+
+        private async void LoadFileButtonClick(object sender, RoutedEventArgs e)
+        {
+            var picker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                CommitButtonText = "All done",
+                SuggestedStartLocation = PickerLocationId.PicturesLibrary,
+                FileTypeFilter = {".jpg", ".jpeg", ".png", ".bmp"}
+            };
+
+#if WINDOWS_PHONE_APP
+            picker.PickSingleFileAndContinue();
+#elif WINDOWS_APP
+            StorageFile file = await picker.PickSingleFileAsync();
+            DisplayFileName(file);
+#endif
+        }
+
+        private async void LoadMultipleFilesButtonClick(object sender, RoutedEventArgs e)
+        {
+            var picker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.List,
+                SuggestedStartLocation = PickerLocationId.Desktop,
+                FileTypeFilter = {"*"}
+            };
+
+#if WINDOWS_PHONE_APP
+            picker.PickMultipleFilesAndContinue();
+#elif WINDOWS_APP
+            IReadOnlyList<StorageFile> files = await picker.PickMultipleFilesAsync();
+            foreach (var file in files)
+            {
+                DisplayFileName(file);
+            }
+#endif
+        }
+
+#if WINDOWS_PHONE_APP
+        internal void WinPhonePickedFile(FileOpenPickerContinuationEventArgs arguments)
+        {
+            var files = arguments.Files;
+            foreach (var file in files)
+            {
+                DisplayFileName(file);
+            }
+        }
+#endif
+
+        private void DisplayFileName(StorageFile file)
+        {
+            if (file == null)
+            {
+                return;
+            }
+
+//            this.TextBlockList.Text += file.Name + Environment.NewLine;
+        }
+
+        private void SelectionChangedEventHandler(object sender, SelectionChangedEventArgs e)
+        {
+//            ListViewItem lbi = ((sender as ListView).SelectedItem as ListViewItem);
+
+            var selectedObject = e.AddedItems[0];
+        }
+
+
     }
 }

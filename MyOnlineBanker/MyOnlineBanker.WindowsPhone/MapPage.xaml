@@ -10,20 +10,21 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Margin="20 50 20 20">
+    <Grid Margin="0 50 0 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
         <maps:MapControl Name="Map"
-                         PedestrianFeaturesVisible="True"
+                         PedestrianFeaturesVisible="True" Margin="0,-44,0,38" Grid.RowSpan="2"
                          />
         <Button Content="Go Back" 
-                HorizontalAlignment="Stretch" 
-                Margin="0,0,0,-9" 
+                 
+                
                 Grid.Row="1" 
+                HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom"
-                Click="MapBack_OnClick"/>
+                Click="MapBack_OnClick" Margin="0,0,0,-9"/>
     </Grid>
 </Page>

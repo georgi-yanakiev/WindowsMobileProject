@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,9 +28,10 @@ namespace MyOnlineBanker
         public MainPage()
         {
             this.InitializeComponent();
+            LogoutButton.IsEnabled = false;
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
-           
+
 //            this.DataContext = new LoginViewModel();
         }
 
@@ -40,8 +42,8 @@ namespace MyOnlineBanker
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-           
 
+            
             // TODO: Prepare page for display here.
 
             // TODO: If your application contains multiple pages, ensure that you are
@@ -49,7 +51,6 @@ namespace MyOnlineBanker
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
-
         }
 
         public async void LoginUser()
@@ -57,7 +58,7 @@ namespace MyOnlineBanker
             try
             {
                 await ParseUser.LogInAsync(this.UsernameTextBox.Text, this.PasswordTextBox.Password);
-                // Login was successful.
+                ShowNotification("Login", "Login successful!");
                 LoginButton.IsEnabled = false;
                 LogoutButton.IsEnabled = true;
                 Frame.Navigate(typeof (CustomerDetailsPage));
@@ -66,7 +67,8 @@ namespace MyOnlineBanker
             }
             catch (Exception e)
             {
-                // The login failed. Check the error to see why.
+                
+                ShowNotification("Login Error", e.Message);
             }
         }
 
@@ -78,18 +80,39 @@ namespace MyOnlineBanker
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             ParseUser.LogOut();
+            ShowNotification("Logout", "You were logged out!");
             LogoutButton.IsEnabled = false;
             LoginButton.IsEnabled = true;
         }
 
         private void Maps_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MapPage));
+            Frame.Navigate(typeof (MapPage));
         }
 
         private void Contacts_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof (ContactsPage));
         }
+
+        public static void ShowNotification(string title, string message)
+        {
+            const ToastTemplateType template =
+                Windows.UI.Notifications.ToastTemplateType.ToastText02;
+            var toastXml =
+                Windows.UI.Notifications.ToastNotificationManager.GetTemplateContent(template);
+
+            var toastTextElements = toastXml.GetElementsByTagName("text");
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode(title));
+            toastTextElements[1].AppendChild(toastXml.CreateTextNode(message));
+
+            var toast = new Windows.UI.Notifications.ToastNotification(toastXml);
+
+            var toastNotifier =
+                Windows.UI.Notifications.ToastNotificationManager.CreateToastNotifier();
+            toastNotifier.Show(toast);
+        }
+
+
     }
 }
