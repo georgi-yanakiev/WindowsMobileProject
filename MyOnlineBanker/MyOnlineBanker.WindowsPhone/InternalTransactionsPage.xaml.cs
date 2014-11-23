@@ -1,8 +1,4 @@
-﻿using System.Threading.Tasks;
-using Windows.ApplicationModel.Activation;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.UI.Popups;
+﻿using Windows.UI.Notifications;
 using MyOnlineBanker.Common;
 using System;
 using System.Collections.Generic;
@@ -29,19 +25,18 @@ namespace MyOnlineBanker
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CustomerDetailsPage : Page
+    public sealed partial class InternalTransactionsPage : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public CustomerDetailsPage()
+        public InternalTransactionsPage()
         {
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-            this.DataContext = new AppViewModel();
         }
 
         /// <summary>
@@ -105,7 +100,8 @@ namespace MyOnlineBanker
         /// handlers that cannot cancel the navigation request.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.navigationHelper.OnNavigatedTo(e);
+            var nav = e.Parameter;
+            this.DataContext = nav;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -115,96 +111,39 @@ namespace MyOnlineBanker
 
         #endregion
 
-        //************************************************************************
-
-        private async void LoadFileButtonClick(object sender, RoutedEventArgs e)
+        private void TransactionButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var picker = new FileOpenPicker
+            if (this.AmounTextBox.Text != string.Empty)
             {
-                ViewMode = PickerViewMode.Thumbnail,
-                CommitButtonText = "All done",
-                SuggestedStartLocation = PickerLocationId.PicturesLibrary,
-                FileTypeFilter = {".jpg", ".jpeg", ".png", ".bmp"}
-            };
-
-#if WINDOWS_PHONE_APP
-            picker.PickSingleFileAndContinue();
-#elif WINDOWS_APP
-            StorageFile file = await picker.PickSingleFileAsync();
-            DisplayFileName(file);
-#endif
-        }
-
-        private async void LoadMultipleFilesButtonClick(object sender, RoutedEventArgs e)
-        {
-            var picker = new FileOpenPicker
-            {
-                ViewMode = PickerViewMode.List,
-                SuggestedStartLocation = PickerLocationId.Desktop,
-                FileTypeFilter = {"*"}
-            };
-
-#if WINDOWS_PHONE_APP
-            picker.PickMultipleFilesAndContinue();
-#elif WINDOWS_APP
-            IReadOnlyList<StorageFile> files = await picker.PickMultipleFilesAsync();
-            foreach (var file in files)
-            {
-                DisplayFileName(file);
+                this.AmounTextBox.Text = string.Empty;
+                ShowNotification("Transaction", "Transaction complete!");
             }
-#endif
-        }
-
-#if WINDOWS_PHONE_APP
-        internal void WinPhonePickedFile(FileOpenPickerContinuationEventArgs arguments)
-        {
-            var files = arguments.Files;
-            foreach (var file in files)
+            else
             {
-                DisplayFileName(file);
+                ShowNotification("Error", "Please enter an amount.");
             }
+           
         }
-#endif
 
-        private void DisplayFileName(StorageFile file)
+        public static void ShowNotification(string title, string message)
         {
-            if (file == null)
-            {
-                return;
-            }
+            const ToastTemplateType template =
+                Windows.UI.Notifications.ToastTemplateType.ToastText02;
+            var toastXml =
+                Windows.UI.Notifications.ToastNotificationManager.GetTemplateContent(template);
 
-//            this.TextBlockList.Text += file.Name + Environment.NewLine;
+            var toastTextElements = toastXml.GetElementsByTagName("text");
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode(title));
+            toastTextElements[1].AppendChild(toastXml.CreateTextNode(message));
+
+            var toast = new Windows.UI.Notifications.ToastNotification(toastXml);
+
+            var toastNotifier =
+                Windows.UI.Notifications.ToastNotificationManager.CreateToastNotifier();
+            toastNotifier.Show(toast);
+            System.Threading.Tasks.Task.Delay(2000).Wait();
+            ToastNotificationManager.History.Clear();
         }
 
-        private void SelectionChangedEventHandler(object sender, SelectionChangedEventArgs e)
-        {
-            var selectedObject = e.AddedItems[0];
-
-            this.Frame.Navigate(typeof (AccountDetailsPage), selectedObject);
-        }
-
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            var msg = new MessageDialog("Choose transaction!", "Transactions");
-            msg.Commands.Add(new UICommand("Internal", new UICommandInvokedHandler(CommandHandlers)));
-            msg.Commands.Add(new UICommand("External", new UICommandInvokedHandler(CommandHandlers)));
-            msg.ShowAsync();
-        }
-
-        public void CommandHandlers(IUICommand commandLabel)
-        {
-            var actions = commandLabel.Label;
-            switch (actions)
-            {
-                case "Internal":
-                    this.Frame.Navigate(typeof (InternalTransactionsPage), this.DataContext);
-                    break;
-
-                case "External":
-                    this.Frame.Navigate(typeof(InternalTransactionsPage), this.DataContext);
-                    break;
-            }
-        }
     }
 }

@@ -8,7 +8,14 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     >
-    
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="ReShare" Label="Transactions" Click="ButtonBase_OnClick"/>
+            <AppBarButton Icon="Camera" Label="Scan/Open Cheque" Click="LoadFileButtonClick"/>
+            <AppBarButton Icon="Memo" Label="Transaction History"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+
     <Grid x:Name="LayoutRoot">
         <StackPanel>
         <Border BorderThickness="3" BorderBrush="Purple" Margin="0 0 0 0">
@@ -29,9 +36,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Name="LoadFile" Content="Open/Capture" 
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Center" Click="LoadFileButtonClick"/>
-        
     </Grid>
 </Page>
