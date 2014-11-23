@@ -8,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+//using Windows.Phone.UI.Input;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -74,7 +75,6 @@ namespace MyOnlineBanker
             var toastNotifier =
                 Windows.UI.Notifications.ToastNotificationManager.CreateToastNotifier();
             toastNotifier.Show(toast);
-           
         }
 
         /// <summary>

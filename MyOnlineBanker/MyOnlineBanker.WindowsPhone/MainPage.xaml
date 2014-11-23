@@ -32,14 +32,14 @@
             <PasswordBox
         		x:Name="PasswordTextBox"
         		Margin="138,162,47,0" Height="33"/>
-            <TextBlock 
+            <TextBlock Name="UsernameBlock"
         		HorizontalAlignment="Left" 
         		Margin="34,113,0,0" 
         		TextWrapping="Wrap" 
         		Text="Username" 
         		VerticalAlignment="Top" 
         		FontSize="20" RenderTransformOrigin="0.749,1.604"/>
-            <TextBlock 
+            <TextBlock Name="PasswordBlock" 
         		HorizontalAlignment="Left" 
         		Margin="34,171,0,0" 
         		TextWrapping="Wrap" 

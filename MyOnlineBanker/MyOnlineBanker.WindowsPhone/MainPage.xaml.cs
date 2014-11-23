@@ -34,8 +34,6 @@ namespace MyOnlineBanker
             LogoutButton.IsEnabled = false;
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
-
-            var context = new AppViewModel();
         }
 
         /// <summary>
@@ -60,21 +58,21 @@ namespace MyOnlineBanker
             {
                 await ParseUser.LogInAsync(this.UsernameTextBox.Text, this.PasswordTextBox.Password);
                 
-                ShowNotification("Login successful!");
+                ShowNotification("Login", "Login successful!");
                 LoginButton.IsEnabled = false;
                 LogoutButton.IsEnabled = true;
                 Frame.Navigate(typeof (CustomerDetailsPage));
                 this.UsernameTextBox.Text = string.Empty;
                 this.PasswordTextBox.Password = string.Empty;
-                System.Threading.Tasks.Task.Delay(2000).Wait();
-                ToastNotificationManager.History.Clear();
-
+                this.UsernameBlock.Visibility = Visibility.Collapsed;
+                this.PasswordBlock.Visibility = Visibility.Collapsed;
+                this.UsernameTextBox.Visibility = Visibility.Collapsed;
+                this.PasswordTextBox.Visibility = Visibility.Collapsed;
+                
             }
             catch (Exception e)
             {
-                ShowNotification(e.Message);
-                System.Threading.Tasks.Task.Delay(2000).Wait();
-                ToastNotificationManager.History.Clear();
+                ShowNotification("Login Error", e.Message);
             }
         }
 
@@ -86,11 +84,14 @@ namespace MyOnlineBanker
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             ParseUser.LogOut();
-            ShowNotification("You were logged out!");
+            ShowNotification("Logout", "You were logged out!");
             LogoutButton.IsEnabled = false;
             LoginButton.IsEnabled = true;
-            System.Threading.Tasks.Task.Delay(2000).Wait();
-            ToastNotificationManager.History.Clear();
+            this.UsernameBlock.Visibility = Visibility.Visible;
+            this.PasswordBlock.Visibility = Visibility.Visible;
+            this.UsernameTextBox.Visibility = Visibility.Visible;
+            this.PasswordTextBox.Visibility = Visibility.Visible;
+            
         }
 
         private void Maps_Click(object sender, RoutedEventArgs e)
@@ -103,23 +104,24 @@ namespace MyOnlineBanker
             this.Frame.Navigate(typeof (ContactsPage));
         }
 
-        public static void ShowNotification(string message)
+        public static void ShowNotification(string title, string message)
         {
             const ToastTemplateType template =
-                Windows.UI.Notifications.ToastTemplateType.ToastText01;
+                Windows.UI.Notifications.ToastTemplateType.ToastText02;
             var toastXml =
                 Windows.UI.Notifications.ToastNotificationManager.GetTemplateContent(template);
 
             var toastTextElements = toastXml.GetElementsByTagName("text");
-            toastTextElements[0].AppendChild(toastXml.CreateTextNode(message));
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode(title));
+            toastTextElements[1].AppendChild(toastXml.CreateTextNode(message));
 
             var toast = new Windows.UI.Notifications.ToastNotification(toastXml);
 
             var toastNotifier =
                 Windows.UI.Notifications.ToastNotificationManager.CreateToastNotifier();
             toastNotifier.Show(toast);
-            
-            
+            System.Threading.Tasks.Task.Delay(2000).Wait();
+            ToastNotificationManager.History.Clear();
         }
 
         private void UIElement_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
