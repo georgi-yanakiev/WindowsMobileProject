@@ -1,10 +1,4 @@
-﻿using System.Threading.Tasks;
-using Windows.ApplicationModel.Activation;
-using Windows.Phone.UI.Input;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.UI.Popups;
-using MyOnlineBanker.Common;
+﻿using MyOnlineBanker.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,34 +17,24 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
-using MyOnlineBanker.ViewModels;
-using Parse;
 
 namespace MyOnlineBanker
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CustomerDetailsPage : Page
+    public sealed partial class ExternalTransactionsPage : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public CustomerDetailsPage()
+        public ExternalTransactionsPage()
         {
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-           
-            this.DataContext = new AppViewModel();
-            
-        }
-
-        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
-        {
-//            this.Frame.Navigate(typeof (MainPage));
         }
 
         /// <summary>
@@ -114,111 +98,25 @@ namespace MyOnlineBanker
         /// handlers that cannot cancel the navigation request.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.navigationHelper.OnNavigatedTo(e);
+            var nav = e.Parameter;
+            this.DataContext = nav;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-//            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            
         }
 
         #endregion
 
-        //************************************************************************
-
-        private async void LoadFileButtonClick(object sender, RoutedEventArgs e)
+        private void TransactionButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var picker = new FileOpenPicker
-            {
-                ViewMode = PickerViewMode.Thumbnail,
-                CommitButtonText = "All done",
-                SuggestedStartLocation = PickerLocationId.PicturesLibrary,
-                FileTypeFilter = {".jpg", ".jpeg", ".png", ".bmp"}
-            };
-
-#if WINDOWS_PHONE_APP
-            picker.PickSingleFileAndContinue();
-#elif WINDOWS_APP
-            StorageFile file = await picker.PickSingleFileAsync();
-            DisplayFileName(file);
-#endif
+            
         }
 
-        private async void LoadMultipleFilesButtonClick(object sender, RoutedEventArgs e)
+        private void GoBackExternalButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var picker = new FileOpenPicker
-            {
-                ViewMode = PickerViewMode.List,
-                SuggestedStartLocation = PickerLocationId.Desktop,
-                FileTypeFilter = {"*"}
-            };
-
-#if WINDOWS_PHONE_APP
-            picker.PickMultipleFilesAndContinue();
-#elif WINDOWS_APP
-            IReadOnlyList<StorageFile> files = await picker.PickMultipleFilesAsync();
-            foreach (var file in files)
-            {
-                DisplayFileName(file);
-            }
-#endif
-        }
-
-#if WINDOWS_PHONE_APP
-        internal void WinPhonePickedFile(FileOpenPickerContinuationEventArgs arguments)
-        {
-            var files = arguments.Files;
-            foreach (var file in files)
-            {
-                DisplayFileName(file);
-            }
-        }
-#endif
-
-        private void DisplayFileName(StorageFile file)
-        {
-            if (file == null)
-            {
-                return;
-            }
-
-//            this.TextBlockList.Text += file.Name + Environment.NewLine;
-        }
-
-        private void SelectionChangedEventHandler(object sender, SelectionChangedEventArgs e)
-        {
-            var selectedObject = e.AddedItems[0];
-
-            this.Frame.Navigate(typeof (AccountDetailsPage), selectedObject);
-        }
-
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            var msg = new MessageDialog("Choose transaction!", "Transactions");
-            msg.Commands.Add(new UICommand("Internal", new UICommandInvokedHandler(CommandHandlers)));
-            msg.Commands.Add(new UICommand("External", new UICommandInvokedHandler(CommandHandlers)));
-            msg.ShowAsync();
-        }
-
-        public void CommandHandlers(IUICommand commandLabel)
-        {
-            var actions = commandLabel.Label;
-            switch (actions)
-            {
-                case "Internal":
-                    this.Frame.Navigate(typeof (InternalTransactionsPage), this.DataContext);
-                    break;
-
-                case "External":
-                    this.Frame.Navigate(typeof(ExternalTransactionsPage), this.DataContext);
-                    break;
-            }
-        }
-
-        private void GoBackAccountsButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MainPage));
+            this.Frame.Navigate(typeof(CustomerDetailsPage));
         }
     }
 }

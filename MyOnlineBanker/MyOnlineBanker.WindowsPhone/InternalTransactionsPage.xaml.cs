@@ -106,7 +106,7 @@ namespace MyOnlineBanker
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            this.navigationHelper.OnNavigatedFrom(e);
+//            this.Frame.Navigate(typeof(CustomerDetailsPage));
         }
 
         #endregion
@@ -122,28 +122,31 @@ namespace MyOnlineBanker
             {
                 ShowNotification("Error", "Please enter an amount.");
             }
-           
+
+            
         }
 
         public static void ShowNotification(string title, string message)
         {
             const ToastTemplateType template =
-                Windows.UI.Notifications.ToastTemplateType.ToastText02;
-            var toastXml =
-                Windows.UI.Notifications.ToastNotificationManager.GetTemplateContent(template);
+                ToastTemplateType.ToastText02;
+            var toastXml = ToastNotificationManager.GetTemplateContent(template);
 
             var toastTextElements = toastXml.GetElementsByTagName("text");
             toastTextElements[0].AppendChild(toastXml.CreateTextNode(title));
             toastTextElements[1].AppendChild(toastXml.CreateTextNode(message));
 
-            var toast = new Windows.UI.Notifications.ToastNotification(toastXml);
+            var toast = new ToastNotification(toastXml);
 
-            var toastNotifier =
-                Windows.UI.Notifications.ToastNotificationManager.CreateToastNotifier();
+            var toastNotifier = ToastNotificationManager.CreateToastNotifier();
             toastNotifier.Show(toast);
-            System.Threading.Tasks.Task.Delay(2000).Wait();
+            System.Threading.Tasks.Task.Delay(2500).Wait();
             ToastNotificationManager.History.Clear();
         }
 
+        private void GoBackInternalButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(CustomerDetailsPage));
+        }
     }
 }

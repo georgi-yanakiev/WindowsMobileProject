@@ -16,9 +16,9 @@
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Border BorderThickness="3" BorderBrush="Purple" Margin="0 50 0 0">
             <TextBlock
-            Text="Login"
+            Text="My Personal Banker"
             FontSize="60"
-            HorizontalAlignment="Center" Margin="641,15,562,15" Width="157"/>
+            HorizontalAlignment="Center" Margin="423,15,412,15" Width="525"/>
         </Border>
         <Grid Height="631">
 
@@ -61,22 +61,22 @@
                     Click="Logout_Click" 
                     Height="78"
                     FontSize="30"/>
-<!--            <Button Content="Contacts" -->
-<!--                    HorizontalAlignment="Left" -->
-<!--                    Margin="19,419,0,0" -->
-<!--                    VerticalAlignment="Top" -->
-<!--                    Width="204" -->
-<!--                    Click="Contacts_Click" -->
-<!--                    Height="78"-->
-<!--                    FontSize="30"/>-->
-<!--            <Button Content="Map" -->
-<!--                    HorizontalAlignment="Left" -->
-<!--                    Margin="1125,419,0,0" -->
-<!--                    VerticalAlignment="Top" -->
-<!--                    Width="204" -->
-<!--                    Click="Maps_Click" -->
-<!--                    Height="78"-->
-<!--                    FontSize="30"/>-->
+            <!--            <Button Content="Contacts" -->
+            <!--                    HorizontalAlignment="Left" -->
+            <!--                    Margin="19,419,0,0" -->
+            <!--                    VerticalAlignment="Top" -->
+            <!--                    Width="204" -->
+            <!--                    Click="Contacts_Click" -->
+            <!--                    Height="78"-->
+            <!--                    FontSize="30"/>-->
+            <!--            <Button Content="Map" -->
+            <!--                    HorizontalAlignment="Left" -->
+            <!--                    Margin="1125,419,0,0" -->
+            <!--                    VerticalAlignment="Top" -->
+            <!--                    Width="204" -->
+            <!--                    Click="Maps_Click" -->
+            <!--                    Height="78"-->
+            <!--                    FontSize="30"/>-->
         </Grid>
     </StackPanel>
 </Page>

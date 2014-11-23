@@ -32,9 +32,11 @@ namespace MyOnlineBanker
         {
             this.InitializeComponent();
             LogoutButton.IsEnabled = false;
+            ToAccountsButton.Visibility = Visibility.Collapsed;
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
+
 
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
@@ -68,7 +70,8 @@ namespace MyOnlineBanker
                 this.PasswordBlock.Visibility = Visibility.Collapsed;
                 this.UsernameTextBox.Visibility = Visibility.Collapsed;
                 this.PasswordTextBox.Visibility = Visibility.Collapsed;
-                
+                this.ToAccountsButton.Visibility = Visibility.Visible;
+
             }
             catch (Exception e)
             {
@@ -91,7 +94,8 @@ namespace MyOnlineBanker
             this.PasswordBlock.Visibility = Visibility.Visible;
             this.UsernameTextBox.Visibility = Visibility.Visible;
             this.PasswordTextBox.Visibility = Visibility.Visible;
-            
+            this.ToAccountsButton.Visibility = Visibility.Collapsed;
+
         }
 
         private void Maps_Click(object sender, RoutedEventArgs e)
@@ -107,30 +111,26 @@ namespace MyOnlineBanker
         public static void ShowNotification(string title, string message)
         {
             const ToastTemplateType template =
-                Windows.UI.Notifications.ToastTemplateType.ToastText02;
+                ToastTemplateType.ToastText02;
             var toastXml =
-                Windows.UI.Notifications.ToastNotificationManager.GetTemplateContent(template);
+                ToastNotificationManager.GetTemplateContent(template);
 
             var toastTextElements = toastXml.GetElementsByTagName("text");
             toastTextElements[0].AppendChild(toastXml.CreateTextNode(title));
             toastTextElements[1].AppendChild(toastXml.CreateTextNode(message));
 
-            var toast = new Windows.UI.Notifications.ToastNotification(toastXml);
+            var toast = new ToastNotification(toastXml);
 
             var toastNotifier =
-                Windows.UI.Notifications.ToastNotificationManager.CreateToastNotifier();
+                ToastNotificationManager.CreateToastNotifier();
             toastNotifier.Show(toast);
-            System.Threading.Tasks.Task.Delay(2000).Wait();
+            Task.Delay(2500).Wait();
             ToastNotificationManager.History.Clear();
         }
 
-        private void UIElement_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void ToAccountsButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (e.Cumulative.Translation.X < 0 && ParseUser.CurrentUser != null)
-            {
-                this.Frame.Navigate(typeof (CustomerDetailsPage));
-            }
+            this.Frame.Navigate(typeof (CustomerDetailsPage));
         }
-
     }
 }

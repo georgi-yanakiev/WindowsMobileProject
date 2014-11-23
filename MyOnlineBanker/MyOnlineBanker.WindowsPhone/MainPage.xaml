@@ -6,9 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    ManipulationMode="TranslateX"
-    ManipulationDelta="UIElement_OnManipulationDelta">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.BottomAppBar>
         <CommandBar Height="71">
             <AppBarButton Icon="ContactInfo" Label="Contact Info" Click="Contacts_Click"/>
@@ -20,7 +18,7 @@
 
         <Border BorderThickness="3" BorderBrush="Purple" Margin="0 0 0 0">
             <TextBlock
-            Text="Login"
+            Text="My Personal Banker"
             FontSize="40"
             HorizontalAlignment="Center" Margin="0 15 0 15"/>
         </Border>
@@ -47,8 +45,9 @@
         		VerticalAlignment="Top" 
         		Height="20" 
         		FontSize="20"/>
-            <Button Name="LoginButton"  Content="Login" HorizontalAlignment="Left" Margin="34,399,0,-168" VerticalAlignment="Top" Width="156" Click="Login_Click"/>
-            <Button Name="LogoutButton" Content="Logout" HorizontalAlignment="Left" Margin="197,399,0,-168" VerticalAlignment="Top" Width="156" Click="Logout_Click"/>
+            <Button Name="LoginButton"  Content="Login" HorizontalAlignment="Left" Margin="34,392,0,0" VerticalAlignment="Top" Width="156" Click="Login_Click"/>
+            <Button Name="LogoutButton" Content="Logout" HorizontalAlignment="Left" Margin="197,392,0,0" VerticalAlignment="Top" Width="156" Click="Logout_Click"/>
+            <Button Name="ToAccountsButton" Content="To Accounts" HorizontalAlignment="Stretch" Margin="0 435" Click="ToAccountsButton_OnClick"/>
         </Grid>
     </StackPanel>
 </Page>

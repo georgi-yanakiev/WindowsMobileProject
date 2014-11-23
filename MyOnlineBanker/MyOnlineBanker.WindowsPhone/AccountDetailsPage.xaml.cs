@@ -1,4 +1,5 @@
-﻿using MyOnlineBanker.Common;
+﻿using Windows.Phone.UI.Input;
+using MyOnlineBanker.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,6 +20,7 @@ using Windows.UI.Xaml.Navigation;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 using MyOnlineBanker.Models;
 using MyOnlineBanker.ViewModels;
+using Parse;
 
 namespace MyOnlineBanker
 {
@@ -37,7 +39,9 @@ namespace MyOnlineBanker
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            
         }
+
 
         /// <summary>
         /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
@@ -106,7 +110,7 @@ namespace MyOnlineBanker
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            this.Frame.Navigate(typeof (CustomerDetailsPage));
+           
         }
 
         private void UIElement_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
@@ -118,5 +122,10 @@ namespace MyOnlineBanker
         }
 
         #endregion
+
+//        private void GoBackDetailsButton_OnClick(object sender, RoutedEventArgs e)
+//        {
+//            this.Frame.Navigate(typeof (CustomerDetailsPage));
+//        }
     }
 }

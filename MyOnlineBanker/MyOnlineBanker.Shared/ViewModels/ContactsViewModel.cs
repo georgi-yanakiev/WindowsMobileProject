@@ -4,9 +4,8 @@ using System.Text;
 
 namespace MyOnlineBanker.ViewModels
 {
-    public class ContactsViewModel
+    public class ContactsViewModel : ViewModelBase
     {
-
         public ContactsViewModel()
         {
             this.Address = "Sofia 1000";

@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="MyOnlineBanker.InternalTransactionsPage"
+    x:Class="MyOnlineBanker.ExternalTransactionsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MyOnlineBanker"
@@ -14,12 +14,18 @@
             <Setter Property="FontSize" Value="22" />
             <Setter Property="Margin" Value="20 10 0 -30" />
         </Style>
+        <Style x:Key="TbRecipStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="19" />
+            <Setter Property="Margin" Value="20 28 0 -30" />
+        </Style>
     </Page.Resources>
 
     <StackPanel>
         <Border BorderThickness="3" BorderBrush="Purple" Margin="0 0 0 0">
             <TextBlock
-                Text="Internal Transactions"
+                Text="External Transactions"
                 FontSize="40"
                 HorizontalAlignment="Center" Margin="0 15 0 10" />
         </Border>
@@ -36,19 +42,17 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <TextBlock Text="To Account:" Style="{StaticResource TbStyle}" />
-        <ComboBox ItemsSource="{Binding Customers}" FontSize="20" Margin="20">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding AccountNumber}" Width="220" FontSize="19" />
-                        <TextBlock Text="{Binding Balance}" Width="80"  FontSize="19" />
-                        <TextBlock Text="{Binding Currency}" Width="50" FontSize="19" />
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
 
-        <Grid Height="40" Margin="0 80 0 0">
+        <TextBlock Name="NameTextBlock" Text="Name" Style="{StaticResource TbRecipStyle}" Margin="20,40,275,-30" />
+        <TextBox Name="NameInputBox" Margin="106,0,20,0" Height="10"/>
+        <TextBlock Name="IbanTextBlock" Text="IBAN" Style="{StaticResource TbRecipStyle}" Margin="20,20,275,-30" />
+        <TextBox Name="IbanInputBox" Margin="106,0,20,0" Height="10"/>
+        <TextBlock Name="BicTextBlock" Text="BIC" Style="{StaticResource TbRecipStyle}" Margin="20,20,275,-30" />
+        <TextBox Name="BicInputBox" Margin="106,0,173,0" Height="10"/>
+        <TextBlock Name="CurrencyTextBlock" Text="Currency" Style="{StaticResource TbRecipStyle}" Margin="20,20,275,-30" />
+        <TextBox Name="CurrencyInputBox" Margin="105,0,230,0" Height="10"/>
+
+        <Grid Height="40" Margin="0 50 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -59,14 +63,14 @@
             <TextBlock Text="Amount:" 
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="22"
+                       FontSize="20"
                        Grid.Row="0"
-                       Grid.Column="0" Margin="44,4,72,9"/>
+                       Grid.Column="0" Margin="18,4,92,9"/>
             <TextBox Name="AmounTextBox"
                      FontSize="22"
-                     Grid.Row="0" Height="30" Margin="169,0,54,0" Grid.ColumnSpan="2"/>
+                     Grid.Row="0" Height="30" Margin="104,0,64,0" Grid.ColumnSpan="2"/>
         </Grid>
-        <Button Name="TransactionButton"  Content="Commit Transaction" HorizontalAlignment="Center" Margin="0 40" Click="TransactionButton_OnClick"/>
-        <Button Name="GoBackInternalButton" Content="Go Back" HorizontalAlignment="Stretch" Margin="0 44" Click="GoBackInternalButton_OnClick"/>
+        <Button Name="TransactionButton"  Content="Commit Transaction" HorizontalAlignment="Center" Margin="0 20" Click="TransactionButton_OnClick"/>
+        <Button Name="GoBackExternalButton" Content="Go Back" HorizontalAlignment="Stretch" Click="GoBackExternalButton_OnClick"/>
     </StackPanel>
 </Page>

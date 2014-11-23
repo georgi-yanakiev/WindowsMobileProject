@@ -36,5 +36,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Name="GoBackAccountsButton" Content="Go Back"  Margin="0,532,0,-9"  HorizontalAlignment="Stretch" Click="GoBackAccountsButton_OnClick"/>
     </Grid>
 </Page>

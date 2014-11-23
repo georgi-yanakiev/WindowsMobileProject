@@ -8,7 +8,7 @@ using Parse;
 
 namespace MyOnlineBanker.ViewModels
 {
-    public class CustomerViewModel
+    public class CustomerViewModel : ViewModelBase
     {
         public static Expression<Func<Customer, CustomerViewModel>> FromCustomer
         {
