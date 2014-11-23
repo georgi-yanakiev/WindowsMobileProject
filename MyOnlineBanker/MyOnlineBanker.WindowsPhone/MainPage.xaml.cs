@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Notifications;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -32,7 +35,7 @@ namespace MyOnlineBanker
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
-//            this.DataContext = new LoginViewModel();
+            var context = new AppViewModel();
         }
 
         /// <summary>
@@ -42,8 +45,6 @@ namespace MyOnlineBanker
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
-            
             // TODO: Prepare page for display here.
 
             // TODO: If your application contains multiple pages, ensure that you are
@@ -58,17 +59,22 @@ namespace MyOnlineBanker
             try
             {
                 await ParseUser.LogInAsync(this.UsernameTextBox.Text, this.PasswordTextBox.Password);
-                ShowNotification("Login", "Login successful!");
+                
+                ShowNotification("Login successful!");
                 LoginButton.IsEnabled = false;
                 LogoutButton.IsEnabled = true;
                 Frame.Navigate(typeof (CustomerDetailsPage));
                 this.UsernameTextBox.Text = string.Empty;
                 this.PasswordTextBox.Password = string.Empty;
+                System.Threading.Tasks.Task.Delay(2000).Wait();
+                ToastNotificationManager.History.Clear();
+
             }
             catch (Exception e)
             {
-                
-                ShowNotification("Login Error", e.Message);
+                ShowNotification(e.Message);
+                System.Threading.Tasks.Task.Delay(2000).Wait();
+                ToastNotificationManager.History.Clear();
             }
         }
 
@@ -80,39 +86,49 @@ namespace MyOnlineBanker
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             ParseUser.LogOut();
-            ShowNotification("Logout", "You were logged out!");
+            ShowNotification("You were logged out!");
             LogoutButton.IsEnabled = false;
             LoginButton.IsEnabled = true;
+            System.Threading.Tasks.Task.Delay(2000).Wait();
+            ToastNotificationManager.History.Clear();
         }
 
         private void Maps_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof (MapPage));
+            this.Frame.Navigate(typeof (MapPage));
         }
 
         private void Contacts_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof (ContactsPage));
+            this.Frame.Navigate(typeof (ContactsPage));
         }
 
-        public static void ShowNotification(string title, string message)
+        public static void ShowNotification(string message)
         {
             const ToastTemplateType template =
-                Windows.UI.Notifications.ToastTemplateType.ToastText02;
+                Windows.UI.Notifications.ToastTemplateType.ToastText01;
             var toastXml =
                 Windows.UI.Notifications.ToastNotificationManager.GetTemplateContent(template);
 
             var toastTextElements = toastXml.GetElementsByTagName("text");
-            toastTextElements[0].AppendChild(toastXml.CreateTextNode(title));
-            toastTextElements[1].AppendChild(toastXml.CreateTextNode(message));
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode(message));
 
             var toast = new Windows.UI.Notifications.ToastNotification(toastXml);
 
             var toastNotifier =
                 Windows.UI.Notifications.ToastNotificationManager.CreateToastNotifier();
             toastNotifier.Show(toast);
+            
+            
         }
 
+        private void UIElement_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            if (e.Cumulative.Translation.X < 0 && ParseUser.CurrentUser != null)
+            {
+                this.Frame.Navigate(typeof (CustomerDetailsPage));
+            }
+        }
 
     }
 }

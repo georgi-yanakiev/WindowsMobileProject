@@ -36,7 +36,6 @@ namespace MyOnlineBanker.ViewModels
                 {
                     this.customers.Add(item);
                 }
-//                this.SelectedAccount = this.customers.First();
             }
         }
 
@@ -48,30 +47,16 @@ namespace MyOnlineBanker.ViewModels
 //            this.LoginUser();
 
 
-//                        FirstName = model.FirstName,
-//                        MiddleName = model.MiddleName,
-//                        LastName = model.LastName,
-//                        Address = model.Address,
-//                        Phone = model.Phone,
-//                        Iban = model.Iban,
-//                        AccountNumber = model.AccountNumber,
-//                        AccountType = model.AccountType,
-//                        Currency = model.Currency,
-//                        Balance = model.Balance,
-//                        BlockedAmount = model.BlockedAmount
-
 //            ParseObject customer = new Customer();
-//            customer["firstName"] = "Gosho";
-//            customer["middleName"] = "Ivanov";
-//            customer["lastName"] = "Kirov";
-//            customer["address"] = "Sofia, Lozenec 10";
-//            customer["phone"] = 359897654321;
-//            customer["IBAN"] = "UBBSF57645675432";
-//            customer["accountNumber"] = "EUR7644516841";
-//            customer["accountType"] = "Deposit";
-//            customer["currency"] = "EUR";
-//            customer["balance"] = 300.40;
-//            customer["blockedAmount"] = 5.00;
+//            customer["fullName"] = "Gosho Goshev Gogata";
+//            customer["address"] = "Plovdiv, Ivan Vazov 37";
+//            customer["phone"] = "+359123456789";
+//            customer["IBAN"] = "CTBSF1568796332";
+//            customer["accountNumber"] = "CHF3567894568";
+//            customer["accountType"] = "Saving";
+//            customer["currency"] = "CHF";
+//            customer["balance"] = "35000.00";
+//            customer["blockedAmount"] = "200.00";
 //            customer.ACL = new ParseACL(ParseUser.CurrentUser);
 //            customer.SaveAsync();
 

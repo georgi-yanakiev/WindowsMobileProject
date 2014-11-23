@@ -6,7 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    ManipulationMode="TranslateX"
+    ManipulationDelta="UIElement_OnManipulationDelta">
     <Page.BottomAppBar>
         <CommandBar Height="71">
             <AppBarButton Icon="ContactInfo" Label="Contact Info" Click="Contacts_Click"/>
@@ -26,13 +28,13 @@
 
             <TextBox
         		x:Name="UsernameTextBox"
-        		Margin="138,113,47,0"/>
+        		Margin="138,113,47,0" Height="33"/>
             <PasswordBox
         		x:Name="PasswordTextBox"
-        		Margin="138,171,47,0"/>
+        		Margin="138,162,47,0" Height="33"/>
             <TextBlock 
         		HorizontalAlignment="Left" 
-        		Margin="34,128,0,0" 
+        		Margin="34,113,0,0" 
         		TextWrapping="Wrap" 
         		Text="Username" 
         		VerticalAlignment="Top" 
@@ -45,8 +47,8 @@
         		VerticalAlignment="Top" 
         		Height="20" 
         		FontSize="20"/>
-            <Button Name="LoginButton"  Content="Login" HorizontalAlignment="Left" Margin="27,229,0,0" VerticalAlignment="Top" Width="156" Click="Login_Click"/>
-            <Button Name="LogoutButton" Content="Logout" HorizontalAlignment="Left" Margin="211,229,0,0" VerticalAlignment="Top" Width="156" Click="Logout_Click"/>
+            <Button Name="LoginButton"  Content="Login" HorizontalAlignment="Left" Margin="34,399,0,-168" VerticalAlignment="Top" Width="156" Click="Login_Click"/>
+            <Button Name="LogoutButton" Content="Logout" HorizontalAlignment="Left" Margin="197,399,0,-168" VerticalAlignment="Top" Width="156" Click="Logout_Click"/>
         </Grid>
     </StackPanel>
 </Page>

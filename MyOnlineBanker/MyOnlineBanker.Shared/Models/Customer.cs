@@ -8,22 +8,8 @@ namespace MyOnlineBanker.Models
     [ParseClassName("Customers")]
     public class Customer : ParseObject
     {
-        [ParseFieldName("firstName")]
-        public string FirstName
-        {
-            get { return GetProperty<string>(); }
-            set { SetProperty<string>(value); }
-        }
-
-        [ParseFieldName("middleName")]
-        public string MiddleName
-        {
-            get { return GetProperty<string>(); }
-            set { SetProperty<string>(value); }
-        }
-
-        [ParseFieldName("lastName")]
-        public string LastName
+        [ParseFieldName("fullName")]
+        public string FullName
         {
             get { return GetProperty<string>(); }
             set { SetProperty<string>(value); }
@@ -37,10 +23,10 @@ namespace MyOnlineBanker.Models
         }
 
         [ParseFieldName("phone")]
-        public int Phone
+        public string Phone
         {
-            get { return GetProperty<int>(); }
-            set { SetProperty<int>(value); }
+            get { return GetProperty<string>(); }
+            set { SetProperty<string>(value); }
         }
 
         [ParseFieldName("IBAN")]
@@ -72,17 +58,17 @@ namespace MyOnlineBanker.Models
         }
 
         [ParseFieldName("balance")]
-        public decimal Balance
+        public string Balance
         {
-            get { return GetProperty<decimal>(); }
-            set { SetProperty<decimal>(value); }
+            get { return GetProperty<string>(); }
+            set { SetProperty<string>(value); }
         }
 
         [ParseFieldName("blockedAmount")]
-        public decimal BlockedAmount
+        public string BlockedAmount
         {
-            get { return GetProperty<decimal>(); }
-            set { SetProperty<decimal>(value); }
+            get { return GetProperty<string>(); }
+            set { SetProperty<string>(value); }
         }
     }
 }

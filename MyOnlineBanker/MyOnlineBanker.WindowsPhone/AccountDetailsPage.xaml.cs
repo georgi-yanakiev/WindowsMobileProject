@@ -1,8 +1,4 @@
-﻿using System.Threading.Tasks;
-using Windows.ApplicationModel.Activation;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using MyOnlineBanker.Common;
+﻿using MyOnlineBanker.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
+using MyOnlineBanker.Models;
 using MyOnlineBanker.ViewModels;
 
 namespace MyOnlineBanker
@@ -28,19 +25,18 @@ namespace MyOnlineBanker
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CustomerDetailsPage : Page
+    public sealed partial class AccountDetailsPage : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public CustomerDetailsPage()
+        public AccountDetailsPage()
         {
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-            this.DataContext = new AppViewModel();
         }
 
         /// <summary>
@@ -104,84 +100,23 @@ namespace MyOnlineBanker
         /// handlers that cannot cancel the navigation request.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.navigationHelper.OnNavigatedTo(e);
+            var nav = (CustomerViewModel) e.Parameter;
+            this.DataContext = nav;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            this.navigationHelper.OnNavigatedFrom(e);
+            this.Frame.Navigate(typeof (CustomerDetailsPage));
+        }
+
+        private void UIElement_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            if (e.Cumulative.Translation.X > 0)
+            {
+                this.Frame.Navigate(typeof(CustomerDetailsPage));
+            }
         }
 
         #endregion
-
-        //************************************************************************
-
-        private async void LoadFileButtonClick(object sender, RoutedEventArgs e)
-        {
-            var picker = new FileOpenPicker
-            {
-                ViewMode = PickerViewMode.Thumbnail,
-                CommitButtonText = "All done",
-                SuggestedStartLocation = PickerLocationId.PicturesLibrary,
-                FileTypeFilter = {".jpg", ".jpeg", ".png", ".bmp"}
-            };
-
-#if WINDOWS_PHONE_APP
-            picker.PickSingleFileAndContinue();
-#elif WINDOWS_APP
-            StorageFile file = await picker.PickSingleFileAsync();
-            DisplayFileName(file);
-#endif
-        }
-
-        private async void LoadMultipleFilesButtonClick(object sender, RoutedEventArgs e)
-        {
-            var picker = new FileOpenPicker
-            {
-                ViewMode = PickerViewMode.List,
-                SuggestedStartLocation = PickerLocationId.Desktop,
-                FileTypeFilter = {"*"}
-            };
-
-#if WINDOWS_PHONE_APP
-            picker.PickMultipleFilesAndContinue();
-#elif WINDOWS_APP
-            IReadOnlyList<StorageFile> files = await picker.PickMultipleFilesAsync();
-            foreach (var file in files)
-            {
-                DisplayFileName(file);
-            }
-#endif
-        }
-
-#if WINDOWS_PHONE_APP
-        internal void WinPhonePickedFile(FileOpenPickerContinuationEventArgs arguments)
-        {
-            var files = arguments.Files;
-            foreach (var file in files)
-            {
-                DisplayFileName(file);
-            }
-        }
-#endif
-
-        private void DisplayFileName(StorageFile file)
-        {
-            if (file == null)
-            {
-                return;
-            }
-
-//            this.TextBlockList.Text += file.Name + Environment.NewLine;
-        }
-
-        private void SelectionChangedEventHandler(object sender, SelectionChangedEventArgs e)
-        {
-
-            var selectedObject = e.AddedItems[0];
-
-            this.Frame.Navigate(typeof(AccountDetailsPage), selectedObject);
-        }
-
     }
 }
