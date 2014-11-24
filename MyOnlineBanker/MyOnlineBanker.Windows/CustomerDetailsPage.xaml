@@ -1,0 +1,43 @@
+﻿<Page
+    x:Name="pageRoot"
+    x:Class="MyOnlineBanker.CustomerDetailsPage"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyOnlineBanker"
+    xmlns:common="using:MyOnlineBanker.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="ReShare" Label="Transactions" Click="ButtonBase_OnClick"/>
+            <AppBarButton Icon="Camera" Label="Scan/Open Cheque" Click="LoadFileButtonClick"/>
+            <AppBarButton Icon="Memo" Label="Transaction History"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <Border BorderThickness="7" BorderBrush="Purple" Margin="0 40 0 0">
+                <TextBlock
+        			Text="Accounts List"
+        			FontSize="60"
+        			HorizontalAlignment="Center" Margin="0 15 0 10"/>
+            </Border>
+        </StackPanel>
+        <ListView Name="ListViewX"  SelectionChanged="SelectionChangedEventHandler" ItemsSource="{Binding Customers}" Margin="200,180,200,100" FontSize="40">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding AccountNumber}" Width="550" Margin="20 0 0 20" FontSize="45"/>
+                        <TextBlock Text="{Binding Balance}" Width="260"  Margin="0 0 0 20" FontSize="45"/>
+                        <TextBlock Text="{Binding Currency}" Width="110"  Margin="0 0 0 20" FontSize="45"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button x:Name="BackToMain" Content="Go Back" FontSize="38" HorizontalAlignment="Stretch" Margin="-3,582,-3,117" Click="GoBackAccountsButton_OnClick"/>
+    </Grid>
+</Page>

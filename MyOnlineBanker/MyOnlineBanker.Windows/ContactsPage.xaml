@@ -1,0 +1,82 @@
+﻿<Page
+    x:Name="pageRoot"
+    x:Class="MyOnlineBanker.ContactsPage"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyOnlineBanker"
+    xmlns:common="using:MyOnlineBanker.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="TbStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="35" />
+            <Setter Property="Margin" Value="10 60 0 0" />
+        </Style>
+    </Page.Resources>
+
+
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Border BorderThickness="3" BorderBrush="Purple" Margin="0 0 0 0">
+            <TextBlock
+                Text="Contact Information"
+                FontSize="40"
+                HorizontalAlignment="Center" Margin="0 15 0 10" />
+        </Border>
+        <Grid Name="LayoutRoot" Margin="200 100 200 20">
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Head Office"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}" />
+            <TextBlock Text="{Binding Address}"
+                       Style="{StaticResource TbStyle}"
+                       Grid.Row="0"
+                       Grid.Column="1" />
+            <TextBlock Text="Call Center"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}" />
+            <TextBlock Name="PhoneBlock"
+                       Text="{Binding CallCenter}"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Style="{StaticResource TbStyle}"
+                       Holding="PhoneBlock_OnHolding" />
+            <TextBlock Text="Fax"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}" />
+            <TextBlock Text="{Binding Fax}"
+                       Style="{StaticResource TbStyle}"
+                       Grid.Row="2"
+                       Grid.Column="1" />
+            <TextBlock Text="Email"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}" />
+            <TextBlock Text="{Binding Email}"
+                       Style="{StaticResource TbStyle}"
+                       Grid.Row="3"
+                       Grid.Column="1" />
+
+        </Grid>
+        <Button x:Name="BackToMain" Content="Go Back" FontSize="38" HorizontalAlignment="Stretch" Margin="0 90" Click="BackToMain_OnClick"/>
+    </StackPanel>
+</Page>

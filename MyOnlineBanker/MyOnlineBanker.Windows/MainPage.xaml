@@ -24,18 +24,18 @@
 
             <TextBox
         		x:Name="UsernameTextBox"
-        		Margin="594,104,387,483"/>
+        		Margin="594,104,387,483" FontSize="20"/>
             <PasswordBox
         		x:Name="PasswordTextBox"
-        		Margin="594,183,387,404"/>
-            <TextBlock 
+        		Margin="594,183,387,404" FontSize="20"/>
+            <TextBlock Name="UsernameBlock"
         		HorizontalAlignment="Left" 
         		Margin="382,100,0,0" 
         		TextWrapping="Wrap" 
         		Text="Username" 
         		VerticalAlignment="Top" 
         		FontSize="40" RenderTransformOrigin="0.749,1.604"/>
-            <TextBlock 
+            <TextBlock Name="PasswordBlock"
         		HorizontalAlignment="Left" 
         		Margin="382,183,0,0" 
         		TextWrapping="Wrap" 
@@ -61,22 +61,7 @@
                     Click="Logout_Click" 
                     Height="78"
                     FontSize="30"/>
-            <!--            <Button Content="Contacts" -->
-            <!--                    HorizontalAlignment="Left" -->
-            <!--                    Margin="19,419,0,0" -->
-            <!--                    VerticalAlignment="Top" -->
-            <!--                    Width="204" -->
-            <!--                    Click="Contacts_Click" -->
-            <!--                    Height="78"-->
-            <!--                    FontSize="30"/>-->
-            <!--            <Button Content="Map" -->
-            <!--                    HorizontalAlignment="Left" -->
-            <!--                    Margin="1125,419,0,0" -->
-            <!--                    VerticalAlignment="Top" -->
-            <!--                    Width="204" -->
-            <!--                    Click="Maps_Click" -->
-            <!--                    Height="78"-->
-            <!--                    FontSize="30"/>-->
+            <Button Name="ToAccountsButton" Content="To Accounts" FontSize="30" HorizontalAlignment="Stretch" Margin="379,415,384,138" Height="78" Click="ToAccountsButton_OnClick"/> 
         </Grid>
     </StackPanel>
 </Page>

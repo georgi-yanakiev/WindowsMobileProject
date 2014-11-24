@@ -1,0 +1,106 @@
+﻿<Page
+    x:Name="pageRoot"
+    x:Class="MyOnlineBanker.AccountDetailsPage"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyOnlineBanker"
+    xmlns:common="using:MyOnlineBanker.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="TbStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="35" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+    </Page.Resources>
+
+
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Border BorderThickness="7" BorderBrush="Purple" Margin="0 40 0 0">
+            <TextBlock
+        			Text="Account Information"
+        			FontSize="60"
+        			HorizontalAlignment="Center" Margin="0 15 0 10"/>
+        </Border>
+        <Grid Margin="240 60 200 0" Height="400" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Name"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}" />
+            <TextBlock Text="{Binding FullName}"
+                       Style="{StaticResource TbStyle}"
+                       Grid.Row="0"
+                       Grid.Column="1" />
+            <TextBlock Text="Account Number"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}" />
+            <TextBlock Text="{Binding AccountNumber}"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Style="{StaticResource TbStyle}" />
+            <TextBlock Text="Account Type"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}" />
+            <TextBlock Text="{Binding AccountType}"
+                       Style="{StaticResource TbStyle}"
+                       Grid.Row="2"
+                       Grid.Column="1" />
+            <TextBlock Text="IBAN"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}" />
+            <TextBlock Text="{Binding Iban}"
+                       Style="{StaticResource TbStyle}"
+                       Grid.Row="3"
+                       Grid.Column="1" />
+            <TextBlock Text="Currency"
+                       Grid.Row="4"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}" />
+            <TextBlock Text="{Binding Currency}"
+                       Style="{StaticResource TbStyle}"
+                       Grid.Row="4"
+                       Grid.Column="1" />
+            <TextBlock Text="Balance"
+                       Grid.Row="5"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}" />
+            <TextBlock Text="{Binding Balance}"
+                       Style="{StaticResource TbStyle}"
+                       Grid.Row="5"
+                       Grid.Column="1" />
+            <TextBlock Text="Blocked Amount"
+                       Grid.Row="6"
+                       Grid.Column="0"
+                       Style="{StaticResource TbStyle}" />
+            <TextBlock Text="{Binding BlockedAmount}"
+                       Style="{StaticResource TbStyle}"
+                       Grid.Row="6"
+                       Grid.Column="1" />
+
+        </Grid>
+        <Button Name="GoBackDetailsButton" Content="Go Back"  Margin="0 89" FontSize="38" HorizontalAlignment="Stretch" Click="GoBackDetailsButton_OnClick"/>
+    </StackPanel>
+</Page>

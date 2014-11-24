@@ -54,8 +54,6 @@ namespace MyOnlineBanker
             {
                 ShowNotification("Error", "No Internet Connection");
             }
-
-           
         }
 
 
