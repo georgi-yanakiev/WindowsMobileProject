@@ -20,13 +20,13 @@
 
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Border BorderThickness="3" BorderBrush="Purple" Margin="0 0 0 0">
+        <Border BorderThickness="7" BorderBrush="Purple" Margin="0 50 0 0">
             <TextBlock
-                Text="Contact Information"
-                FontSize="40"
-                HorizontalAlignment="Center" Margin="0 15 0 10" />
+            Text="Contact Information"
+            FontSize="60"
+            HorizontalAlignment="Center" Margin="455,15,357,15" Width="540"/>
         </Border>
-        <Grid Name="LayoutRoot" Margin="200 100 200 20">
+        <Grid Name="LayoutRoot" Margin="200 40 200 20">
 
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -77,6 +77,6 @@
                        Grid.Column="1" />
 
         </Grid>
-        <Button x:Name="BackToMain" Content="Go Back" FontSize="38" HorizontalAlignment="Stretch" Margin="0 90" Click="BackToMain_OnClick"/>
+        <Button x:Name="BackToMain" Content="Go Back" FontSize="38" HorizontalAlignment="Stretch" Margin="0 66" Click="BackToMain_OnClick"/>
     </StackPanel>
 </Page>

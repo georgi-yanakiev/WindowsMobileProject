@@ -22,7 +22,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AppViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContactsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CustomerViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ICustomerViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
   </ItemGroup>
 </Project>

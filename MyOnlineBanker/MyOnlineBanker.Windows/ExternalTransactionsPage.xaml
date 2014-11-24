@@ -26,9 +26,9 @@
     </Page.Resources>
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Border BorderThickness="3" BorderBrush="Purple" Margin="0 40 0 0">
+        <Border BorderThickness="7" BorderBrush="Purple" Margin="0 40 0 0">
             <TextBlock
-        			Text="Internal Transactions"
+        			Text="External Transactions"
         			FontSize="60"
         			HorizontalAlignment="Center" Margin="0 15 0 10"/>
         </Border>
@@ -72,9 +72,9 @@
                        Grid.Column="0" Margin="200,-27,350,25"/>
             <TextBox Name="AmounTextBox"
                      FontSize="35"
-                     Grid.Row="0" Height="30" Margin="10,-27,458,35" Grid.Column="1" Grid.ColumnSpan="2"/>
+                     Grid.Row="0" Margin="7,-33,458,43" Grid.Column="1" Grid.ColumnSpan="2"/>
         </Grid>
-        <Button x:Name="TransactionButton"  Content="Commit Transaction" FontSize="30" HorizontalAlignment="Center" Margin="511,-20,540,15" Click="TransactionButton_OnClick" Width="315"/>
+        <Button x:Name="TransactionButton"  Content="Commit Transaction" FontSize="30" HorizontalAlignment="Center" Margin="511,-20,540,10" Click="TransactionButton_OnClick" Width="315"/>
         <Button Name="GoBackExternalButton" Content="Go Back" HorizontalAlignment="Stretch" FontSize="38" Click="GoBackExternalButton_OnClick"/>
     </StackPanel>
 </Page>

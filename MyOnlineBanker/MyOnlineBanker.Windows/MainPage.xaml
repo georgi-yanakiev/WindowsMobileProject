@@ -11,10 +11,11 @@
         <CommandBar Height="71">
             <AppBarButton Icon="ContactInfo" Label="Contact Info" Click="Contacts_Click"/>
             <AppBarButton Icon="Map" Label="Our Offices" Click="Maps_Click"/>
+            <AppBarButton Name="LoginHistoryAppBarButton" Icon="Memo" Label="Login History" Click="LoginHistoryAppBarButton_OnClick"/>
         </CommandBar>
     </Page.BottomAppBar>
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Border BorderThickness="3" BorderBrush="Purple" Margin="0 50 0 0">
+        <Border BorderThickness="7" BorderBrush="Purple" Margin="0 50 0 0">
             <TextBlock
             Text="My Personal Banker"
             FontSize="60"
@@ -48,20 +49,20 @@
                     HorizontalAlignment="Left" 
                     Margin="379,279,0,0" 
                     VerticalAlignment="Top" 
-                    Width="232" 
+                    Width="603" 
                     Click="Login_Click" 
                     Height="78"
                     FontSize="30"/>
             <Button Name="LogoutButton" 
                     Content="Logout" 
                     HorizontalAlignment="Left" 
-                    Margin="750,279,0,0" 
+                    Margin="379,279,0,0" 
                     VerticalAlignment="Top" 
-                    Width="232" 
+                    Width="603" 
                     Click="Logout_Click" 
                     Height="78"
                     FontSize="30"/>
-            <Button Name="ToAccountsButton" Content="To Accounts" FontSize="30" HorizontalAlignment="Stretch" Margin="379,415,384,138" Height="78" Click="ToAccountsButton_OnClick"/> 
+            <Button Name="ToAccountsButton" Content="To Accounts" FontSize="30" HorizontalAlignment="Stretch" Margin="379,415,384,138" Height="78" Click="ToAccountsButton_OnClick"/>
         </Grid>
     </StackPanel>
 </Page>

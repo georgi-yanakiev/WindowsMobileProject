@@ -113,14 +113,16 @@ namespace MyOnlineBanker
 
         private void TransactionButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (this.AmounTextBox.Text != string.Empty)
+            double amt = 0;
+            string inputAmount = this.AmounTextBox.Text;
+            if (inputAmount != string.Empty && double.TryParse(inputAmount, out amt))
             {
                 this.AmounTextBox.Text = string.Empty;
                 ShowNotification("Transaction", "Transaction complete!");
             }
             else
             {
-                ShowNotification("Error", "Please enter an amount.");
+                ShowNotification("Error", "Please enter a valid amount.");
             }
         }
 

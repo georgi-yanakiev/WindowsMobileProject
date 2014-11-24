@@ -1,4 +1,5 @@
-﻿using MyOnlineBanker.Common;
+﻿using Windows.UI.Notifications;
+using MyOnlineBanker.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +24,6 @@ namespace MyOnlineBanker
     /// </summary>
     public sealed partial class ExternalTransactionsPage : Page
     {
-
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -90,7 +90,6 @@ namespace MyOnlineBanker
         /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
         /// The navigation parameter is available in the LoadState method 
         /// in addition to page state preserved during an earlier session.
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedTo(e);
@@ -105,13 +104,49 @@ namespace MyOnlineBanker
 
         private void TransactionButton_OnClick(object sender, RoutedEventArgs e)
         {
+            if (this.NameInputBox.Text == string.Empty || this.IbanInputBox.Text == string.Empty ||
+                this.BicInputBox.Text == string.Empty ||
+                this.CurrencyInputBox.Text == string.Empty || this.AmounTextBox.Text == string.Empty)
+            {
+                ShowNotification("Error", "Please fill all fields.");
+                return;
+            }
 
+            double amt = 0;
+            string inputAmount = this.AmounTextBox.Text;
+            if (inputAmount != string.Empty && double.TryParse(inputAmount, out amt))
+            {
+                this.AmounTextBox.Text = string.Empty;
+                ShowNotification("Transaction", "Transaction complete!");
+            }
+            else
+            {
+                ShowNotification("Error", "Please enter a valid amount.");
+            }
+        }
+
+        public static void ShowNotification(string title, string message)
+        {
+            const ToastTemplateType template =
+                ToastTemplateType.ToastText02;
+            var toastXml = ToastNotificationManager.GetTemplateContent(template);
+
+            var toastTextElements = toastXml.GetElementsByTagName("text");
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode(title));
+            toastTextElements[1].AppendChild(toastXml.CreateTextNode(message));
+
+            var toast = new ToastNotification(toastXml);
+
+            var toastNotifier = ToastNotificationManager.CreateToastNotifier();
+            toastNotifier.Show(toast);
+            System.Threading.Tasks.Task.Delay(2500).Wait();
         }
 
         private void GoBackExternalButton_OnClick(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(CustomerDetailsPage));
+            this.Frame.Navigate(typeof (CustomerDetailsPage));
         }
+
         #endregion
     }
 }

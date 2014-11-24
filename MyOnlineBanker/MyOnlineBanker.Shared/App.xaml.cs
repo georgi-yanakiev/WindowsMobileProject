@@ -37,7 +37,7 @@ namespace MyOnlineBanker
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
 #endif
-        public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "Transaction.sqlite"));//DataBase Name 
+//        public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "Transaction.sqlite"));//DataBase Name 
 
        /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -58,27 +58,27 @@ namespace MyOnlineBanker
                 ShowNotification("Error", "No Internet Connection");
             }
 
-            if (!CheckFileExists("Transaction.sqlite").Result)
-            {
-                using (var db = new SQLiteConnection(DB_PATH))
-                {
-                    db.CreateTable<LoginUser>();
-                }
-            } 
+//            if (!CheckFileExists("Transaction.sqlite").Result)
+//            {
+//                using (var db = new SQLiteConnection(DB_PATH))
+//                {
+//                    db.CreateTable<LoginUser>();
+//                }
+//            } 
         }
 
-        private async Task<bool> CheckFileExists(string fileName) 
-        { 
-            try 
-            { 
-                var store = await Windows.Storage.ApplicationData.Current.LocalFolder.GetFileAsync(fileName); 
-                return true; 
-            } 
-            catch 
-            { 
-            } 
-            return false; 
-        }
+//        private async Task<bool> CheckFileExists(string fileName) 
+//        { 
+//            try 
+//            { 
+//                var store = await Windows.Storage.ApplicationData.Current.LocalFolder.GetFileAsync(fileName); 
+//                return true; 
+//            } 
+//            catch 
+//            { 
+//            } 
+//            return false; 
+//        }
 
         public static void ShowNotification(string title, string message)
         {

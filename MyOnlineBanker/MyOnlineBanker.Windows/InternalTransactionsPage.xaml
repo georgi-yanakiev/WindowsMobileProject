@@ -20,7 +20,7 @@
     </Page.Resources>
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Border BorderThickness="3" BorderBrush="Purple" Margin="0 40 0 0">
+        <Border BorderThickness="7" BorderBrush="Purple" Margin="0 40 0 0">
             <TextBlock
         			Text="Internal Transactions"
         			FontSize="60"
@@ -69,7 +69,7 @@
                      FontSize="35"
                      Grid.Row="0" Margin="651,-13,542,0" Grid.ColumnSpan="2"/>
         </Grid>
-        <Button x:Name="TransactionButton"  Content="Commit Transaction" FontSize="30" HorizontalAlignment="Center" Margin="511,40,540,38" Click="TransactionButton_OnClick" Width="315"/>
+        <Button x:Name="TransactionButton"  Content="Commit Transaction" FontSize="30" HorizontalAlignment="Center" Margin="511,40,540,32" Click="TransactionButton_OnClick" Width="315"/>
         <Button Name="GoBackInternalButton" Content="Go Back" HorizontalAlignment="Stretch" FontSize="38" Click="GoBackInternalButton_OnClick"/>
     </StackPanel>
 </Page>

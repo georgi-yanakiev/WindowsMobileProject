@@ -46,8 +46,8 @@
         		VerticalAlignment="Top" 
         		Height="20" 
         		FontSize="20"/>
-            <Button Name="LoginButton"  Content="Login" HorizontalAlignment="Left" Margin="34,392,0,0" VerticalAlignment="Top" Width="156" Click="Login_Click"/>
-            <Button Name="LogoutButton" Content="Logout" HorizontalAlignment="Left" Margin="197,392,0,0" VerticalAlignment="Top" Width="156" Click="Logout_Click"/>
+            <Button Name="LoginButton"  Content="Login" HorizontalAlignment="Left" Margin="0,392,0,0" VerticalAlignment="Top" Width="400" Click="Login_Click"/>
+            <Button Name="LogoutButton" Content="Logout" HorizontalAlignment="Left" Margin="0,392,0,0" VerticalAlignment="Top" Width="400" Click="Logout_Click"/>
             <Button Name="ToAccountsButton" Content="To Accounts" HorizontalAlignment="Stretch" Margin="0 435" Click="ToAccountsButton_OnClick"/>
         </Grid>
     </StackPanel>

@@ -108,14 +108,6 @@ namespace MyOnlineBanker
 //            PhoneCallManager.ShowPhoneCallUI(PhoneBlock.Text, "My Bank Head Office");
         }
 
-//        private void UIElement_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-//        {
-//            if (e.Cumulative.Translation.X > 0)
-//            {
-//                this.Frame.Navigate(typeof(MainPage));
-//            }
-//        }
-
         #endregion
 
         private void BackToMain_OnClick(object sender, RoutedEventArgs e)

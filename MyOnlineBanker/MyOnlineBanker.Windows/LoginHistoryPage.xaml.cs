@@ -1,5 +1,4 @@
-﻿using Windows.UI.Notifications;
-using MyOnlineBanker.Common;
+﻿using MyOnlineBanker.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,17 +15,22 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
+using MyOnlineBanker.Models;
+using Parse;
+using SQLite;
 
 namespace MyOnlineBanker
 {
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class InternalTransactionsPage : Page
+    public sealed partial class LoginHistoryPage : Page
     {
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private SQLiteAsyncConnection conn;
+        public List<LoginUser> users { get; set; }
 
         /// <summary>
         /// This can be changed to a strongly typed view model.
@@ -46,7 +50,7 @@ namespace MyOnlineBanker
         }
 
 
-        public InternalTransactionsPage()
+        public LoginHistoryPage()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
@@ -92,11 +96,14 @@ namespace MyOnlineBanker
         /// The navigation parameter is available in the LoadState method 
         /// in addition to page state preserved during an earlier session.
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedTo(e);
-            var nav = e.Parameter;
-            this.DataContext = nav;
+            this.navigationHelper.OnNavigatedTo(e);
+            conn = new SQLiteAsyncConnection(ParseUser.CurrentUser.Username);
+            var query = conn.Table<LoginUser>();
+            users = await query.ToListAsync();
+            var sortedUsers = users.OrderByDescending(o => o.LoginDate).ToList();
+            UsersList.ItemsSource = sortedUsers;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -104,41 +111,15 @@ namespace MyOnlineBanker
             navigationHelper.OnNavigatedFrom(e);
         }
 
-        private void TransactionButton_OnClick(object sender, RoutedEventArgs e)
+        private void GoBackButton_OnClick(object sender, RoutedEventArgs e)
         {
-            double amt = 0;
-            string inputAmount = this.AmounTextBox.Text;
-            if (inputAmount != string.Empty && double.TryParse(inputAmount, out amt))
-            {
-                this.AmounTextBox.Text = string.Empty;
-                ShowNotification("Transaction", "Transaction complete!");
-            }
-            else
-            {
-                ShowNotification("Error", "Please enter a valid amount.");
-            }
+            this.Frame.Navigate(typeof(MainPage));
         }
 
-        public static void ShowNotification(string title, string message)
+        private async void RemoveHistory_OnClick(object sender, RoutedEventArgs e)
         {
-            const ToastTemplateType template =
-                ToastTemplateType.ToastText02;
-            var toastXml = ToastNotificationManager.GetTemplateContent(template);
-
-            var toastTextElements = toastXml.GetElementsByTagName("text");
-            toastTextElements[0].AppendChild(toastXml.CreateTextNode(title));
-            toastTextElements[1].AppendChild(toastXml.CreateTextNode(message));
-
-            var toast = new ToastNotification(toastXml);
-
-            var toastNotifier = ToastNotificationManager.CreateToastNotifier();
-            toastNotifier.Show(toast);
-            System.Threading.Tasks.Task.Delay(2500).Wait();
-        }
-
-        private void GoBackInternalButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(CustomerDetailsPage));
+            //            conn = new SQLiteAsyncConnection(ParseUser.CurrentUser.Username);
+            //            await conn.DropTableAsync<LoginUser>();
         }
 
         #endregion

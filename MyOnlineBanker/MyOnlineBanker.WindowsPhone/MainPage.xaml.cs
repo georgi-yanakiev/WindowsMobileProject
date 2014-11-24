@@ -37,7 +37,7 @@ namespace MyOnlineBanker
         public MainPage()
         {
             this.InitializeComponent();
-            LogoutButton.IsEnabled = false;
+            LogoutButton.Visibility = Visibility.Collapsed;
             ToAccountsButton.Visibility = Visibility.Collapsed;
             this.LoginHistoryAppBarButton.Visibility = Visibility.Collapsed;
 
@@ -116,8 +116,8 @@ namespace MyOnlineBanker
 
 
 
-                LoginButton.IsEnabled = false;
-                LogoutButton.IsEnabled = true;
+                LoginButton.Visibility = Visibility.Collapsed;
+                LogoutButton.Visibility = Visibility.Visible;
                 Frame.Navigate(typeof (CustomerDetailsPage));
                 this.UsernameTextBox.Text = string.Empty;
                 this.PasswordTextBox.Password = string.Empty;
@@ -145,8 +145,8 @@ namespace MyOnlineBanker
         {
             ParseUser.LogOut();
             ShowNotification("Logout", "You were logged out!");
-            LogoutButton.IsEnabled = false;
-            LoginButton.IsEnabled = true;
+            LogoutButton.Visibility = Visibility.Collapsed;
+            LoginButton.Visibility = Visibility.Visible;
             this.UsernameBlock.Visibility = Visibility.Visible;
             this.PasswordBlock.Visibility = Visibility.Visible;
             this.UsernameTextBox.Visibility = Visibility.Visible;
