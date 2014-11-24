@@ -1,5 +1,4 @@
-﻿using Windows.UI.Notifications;
-using MyOnlineBanker.Common;
+﻿using MyOnlineBanker.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,19 +17,23 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
-using MyOnlineBanker.ViewModels;
+using MyOnlineBanker.Models;
+using Parse;
+using SQLite;
 
 namespace MyOnlineBanker
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class InternalTransactionsPage : Page
+    public sealed partial class LoginHistoryPage : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-
-        public InternalTransactionsPage()
+        private SQLiteAsyncConnection conn;
+        public List<LoginUser> users { get; set; }
+        
+        public LoginHistoryPage()
         {
             this.InitializeComponent();
 
@@ -98,53 +101,32 @@ namespace MyOnlineBanker
         /// </summary>
         /// <param name="e">Provides data for navigation methods and event
         /// handlers that cannot cancel the navigation request.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            var nav = e.Parameter;
-            this.DataContext = nav;
+            this.navigationHelper.OnNavigatedTo(e);
+            conn = new SQLiteAsyncConnection(ParseUser.CurrentUser.Username);
+            var query = conn.Table<LoginUser>();
+            users = await query.ToListAsync();
+            var sortedUsers = users.OrderByDescending(o => o.LoginDate).ToList();
+            UsersList.ItemsSource = sortedUsers;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-//            this.Frame.Navigate(typeof(CustomerDetailsPage));
+            this.navigationHelper.OnNavigatedFrom(e);
         }
 
         #endregion
 
-        private void TransactionButton_OnClick(object sender, RoutedEventArgs e)
+        private void GoBackButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (this.AmounTextBox.Text != string.Empty)
-            {
-                this.AmounTextBox.Text = string.Empty;
-                ShowNotification("Transaction", "Transaction complete!");
-            }
-            else
-            {
-                ShowNotification("Error", "Please enter an amount.");
-            }
+            this.Frame.Navigate(typeof (MainPage));
         }
 
-        public static void ShowNotification(string title, string message)
+        private async void RemoveHistory_OnClick(object sender, RoutedEventArgs e)
         {
-            const ToastTemplateType template =
-                ToastTemplateType.ToastText02;
-            var toastXml = ToastNotificationManager.GetTemplateContent(template);
-
-            var toastTextElements = toastXml.GetElementsByTagName("text");
-            toastTextElements[0].AppendChild(toastXml.CreateTextNode(title));
-            toastTextElements[1].AppendChild(toastXml.CreateTextNode(message));
-
-            var toast = new ToastNotification(toastXml);
-
-            var toastNotifier = ToastNotificationManager.CreateToastNotifier();
-            toastNotifier.Show(toast);
-            System.Threading.Tasks.Task.Delay(2500).Wait();
-            ToastNotificationManager.History.Clear();
-        }
-
-        private void GoBackInternalButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(CustomerDetailsPage));
+//            conn = new SQLiteAsyncConnection(ParseUser.CurrentUser.Username);
+//            await conn.DropTableAsync<LoginUser>();
         }
     }
 }

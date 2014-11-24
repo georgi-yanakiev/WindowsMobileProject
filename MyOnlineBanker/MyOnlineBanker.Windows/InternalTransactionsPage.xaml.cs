@@ -94,6 +94,7 @@ namespace MyOnlineBanker
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            navigationHelper.OnNavigatedTo(e);
             var nav = e.Parameter;
             this.DataContext = nav;
         }

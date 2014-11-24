@@ -11,6 +11,7 @@
         <CommandBar Height="71">
             <AppBarButton Icon="ContactInfo" Label="Contact Info" Click="Contacts_Click"/>
             <AppBarButton Icon="Map" Label="Our Offices" Click="Maps_Click"/>
+            <AppBarButton Name="LoginHistoryAppBarButton" Icon="Memo" Label="Login History" Click="LoginHistoryAppBarButton_OnClick"/>
         </CommandBar>
     </Page.BottomAppBar>
 
